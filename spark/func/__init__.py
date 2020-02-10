@@ -8,3 +8,4 @@ config.read(abspath('config.ini'))
 
 # Initialize Spark
 spark = SparkSession.builder.appName('ui').config("spark.jars", "/home/ubuntu/sparkclass/jar/postgresql-42.2.9.jar").getOrCreate()
+# spark.sparkContext.setLogLevel("ERROR")

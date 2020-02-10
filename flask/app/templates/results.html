@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>AppDecoder: a generative App design recommendation platform</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+<!--     <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+<!--     <link href="css/style.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>
+						AppDecoder
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+        {% for file_url in file_urls %}
+           <div class="col-md-6">
+           <img src="{{ file_url }}" class="img-thumbnail">
+           </div>
+        {% endfor %}
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="nav">
+						<a class="nav-link active" href="{{ url_for('index') }}">Home</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-12">
+                         <div class="row">
+                             <div class="col-md-12">
+                             <span class="badge badge-success">Recommendation</span>
+                             </div>
+                         </div>
+                      </div><img src="data:image/png;base64,{{result}}" class="img-thumbnail" width="220px" height="220px">
+                         <div class="row">
+                             <div class="col-md-12">
+											<img  src="{{url_for('static', filename='legend.png')}}" width="150px" height="300px" />
+										  </div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-12">
+									 <span class="badge badge-info">App1</span><img src="data:image/jpg;base64,{{img0}}" width="220px" height="220px" class="img-thumbnail">
+									<div class="list-group">
+										 <a href="#" class="list-group-item list-group-item-action active">Rating: {{table[0][2]}}</a>
+										<div class="list-group-item">
+											Category: {{table[0][1]}}
+										</div>
+										<div class="list-group-item">
+											<p class="list-group-item-text">
+												Appname: {{table[0][0]}}
+											</p>
+										</div>
+										<div class="list-group-item justify-content-between">
+											Download: {{table[0][3]}}
+										</div> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									 <span class="badge badge-info">App2</span><img src="data:image/jpg;base64,{{img1}}" width="220px" height="220px" class="img-thumbnail">
+									<div class="list-group">
+										 <a href="#" class="list-group-item list-group-item-action active">Rating: {{table[1][2]}}</a>
+										<div class="list-group-item">
+											Category: {{table[1][1]}}
+										</div>
+										<div class="list-group-item">
+											<p class="list-group-item-text">
+												Appname: {{table[1][0]}}
+											</p>
+										</div>
+										<div class="list-group-item justify-content-between">
+											Download: {{table[1][3]}}
+										</div> 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+								<div class="col-md-12">
+									 <span class="badge badge-info">App3</span><img src="data:image/jpg;base64,{{img2}}" width="220px" height="220px" class="img-thumbnail">
+									<div class="list-group">
+										 <a href="#" class="list-group-item list-group-item-action active">Rating: {{table[2][2]}}</a>
+										<div class="list-group-item">
+											Category: {{table[2][1]}}
+										</div>
+										<div class="list-group-item">
+											<p class="list-group-item-text">
+												Appname: {{table[2][0]}}
+											</p>
+										</div>
+										<div class="list-group-item justify-content-between">
+											Download: {{table[2][3]}}
+										</div> 
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									 <span class="badge badge-info">App4</span><img src="data:image/jpg;base64,{{img3}}" width="220px" height="220px" class="img-thumbnail">
+									<div class="list-group">
+										 <a href="#" class="list-group-item list-group-item-action active">Rating: {{table[3][2]}}</a>
+										<div class="list-group-item">
+											Category: {{table[3][1]}}
+										</div>
+										<div class="list-group-item">
+											<p class="list-group-item-text">
+												Appname: {{table[3][0]}}
+											</p>
+										</div>
+										<div class="list-group-item justify-content-between">
+											Download: {{table[3][3]}}
+										</div> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
+</html>

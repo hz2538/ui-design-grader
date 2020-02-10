@@ -7,12 +7,12 @@ class ReadCSVFile(object):
         self.name = name
         bucket = config.get('AWS', 'bucket')
         self.path = 's3a://{}/rico/{}'.format(bucket, self.name)
-        self.awspath = 's3://{}/rico/'.format(bucket)
+        self.imgpath = 's3a://{}/rico/semantic_annotations/'.format(bucket)
     def load(self):
         csv = spark.read.csv(self.path, header=True)
         return csv
-    def path(self):
-        return self.awspath
+    def img_path(self):
+        return self.imgpath
     
 class ReadJsonFile(object):
     def __init__(self,name):
@@ -51,5 +51,5 @@ class Database(object):
         .option("driver", "org.postgresql.Driver") \
         .load()
 
-#     def query(self, query):
-#         return self.load('({}) AS frame'.format(query))
+    def query(self, query):
+        return self.load('({}) AS frame'.format(query))
