@@ -1,5 +1,5 @@
 # ui-design-grader
-Insight Data Engineering Project NY 20A
+AppDecoder V1.0. Insight Data Engineering Project NY 20A
 
 ### Getting Started
 These instructions will provide you a brief description of my project, and a guideline for our codes as well on how to run those modules on corresponding AWS EC2 instances for development and testing purposes.
@@ -75,13 +75,18 @@ query.py
     >contains the computer-vision methods that refine the output of generative models. 
 
 * flask/testimage
-> The test images for users. You can upload those to the website.
+> contains the test images for users. You can upload those to the website.
 
-* flask/config.ini
+* flask/install.sh
+> contains the steps of enviromental settings.
 
-  
+wsgi.py
+> the script to import the app package and start the server.
 
-*ecbm6040 backend*
+requirements.txt
+> the pip list of the enviroment.
+
+*spark backend*
 
 * ecbm6040/dataloader
 >contains a custom dataloader than can read medical images (NIFTI files) using the specialized nibabel library and MATLAB matrices (.mat files) using scipy.io.loadmat library.
