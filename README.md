@@ -113,12 +113,16 @@ Folder 'flask' and 'spark' were run in different envioronments. See full details
 
 * Make sure you have the spark cluster and the flask cluster ready. Clone this repo to both of them using `git clone https://github.com/hz2538/ui-design-grader.git`.
 
-* For Spark environment, run install.sh to install miniconda and other necessary python packages.
+* For Spark environment, run `spark/install.sh` to install miniconda and other necessary python packages.
 
 * [PostgreSQL setup](https://blog.insightdatascience.com/simply-install-postgresql-58c1e4ebf252) on the t2.micro node.
 
-* 
-### Acknowledgements
+* Go to the spark repository, aftering editing `config.ini`, run `python save_to_db.py` to save to static tables; run `python run.py` to try the sparkML method.
 
-We would present our sincere thanks to our research partners Jiayu Wang, Xiaomin He, Jieying Mai, who provide huge support on our project and have implemented Tensorflow version of this project (Their project link TO BE UPDATE).
+* For Flask and tensorflow2.0 environment, please launch the instance choosing "Deep Learning AMI (Ubuntu 16.04) Version 26.0". 
+    * Run `source activate tensorflow2_p36` to go to the virtual environment. 
+    * Run `flask/install.sh` to install additional packages.
+    * Run `python wsgi.py` to launch the server.
+
+### Acknowledgements
 
