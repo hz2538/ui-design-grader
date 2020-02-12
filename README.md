@@ -123,6 +123,7 @@ Folder 'flask' and 'spark' were run in different envioronments. See full details
     * Run `source activate tensorflow2_p36` to go to the virtual environment. 
     * Run `flask/install.sh` to install additional packages.
     * Run `python wsgi.py` to launch the server.
+    * Advanced: Flask + Nginx + Gunicorn is recommended for frontend deployment. See `documents/flask_advanced.txt` to build up this framework.
 
 ### Acknowledgements
 
