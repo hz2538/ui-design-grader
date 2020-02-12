@@ -59,78 +59,41 @@ The dataset is a large and publicly accessible APP design dataset called RICO (s
             
 *flask frontend*
 
-* flask/app
->the package contains all basic elements such as fonts, static (.css, .js) files, and website templates (.html) and the functions for the server.
-
-interface.py
->contains view functions that mapped to request URLs.
-
-query.py
->contains the connection and query function to PostgreSQL database.  
+* flask/app: The folder contains all basic elements such as fonts, static (.css, .js) files, and website templates (.html) and the functions for the server.
+    * interface.py
+    >contains view functions that mapped to request URLs.
+    * query.py
+    >contains the connection and query function to PostgreSQL database.  
 
 * flask/app/tf2: The tensorflow 2.0 implementation of the deep learning models. Currently, I include Convolutional AutoEncoder ([article](http://users.cecs.anu.edu.au/~Tom.Gedeon/conf/ABCs2018/paper/ABCs2018_paper_58.pdf)), and Variational AutoEncoder ([article](https://arxiv.org/abs/1312.6114)) models.
     * models.py
-    >contains class 'Model' to run tests on current models with customized choice. Mainly AE, VAE, VAE-GAN     (not updated yet) models can be chosen.
+    >contains class 'Model' to run tests on current models with customized choice. Mainly AE, VAE, VAE-GAN (not updated yet) models can be chosen.
     * generate.py
     >contains the computer-vision methods that refine the output of generative models. 
 
 * flask/testimage
-> contains the test images for users. You can upload those to the website.
+>contains the test images for users. You can upload those to the website.
 
 * flask/install.sh
-> contains the steps of enviromental settings.
+>contains the steps of enviromental settings.
 
-wsgi.py
-> the script to import the app package and start the server.
-
-requirements.txt
-> the pip list of the enviroment.
+* wsgi.py
+>the script to import the app package and start the server.
 
 *spark backend*
 
-* ecbm6040/dataloader
->contains a custom dataloader than can read medical images (NIFTI files) using the specialized nibabel library and MATLAB matrices (.mat files) using scipy.io.loadmat library.
+* spark/func
+>contains all functions and classes to load in different format of data.
 
-* ecbm6040/metric
->contains the metrics functions for calculating SSIM, PSNR, and NRMSE.
+* install.sh
+>contains the steps of enviromental settings.
 
-* ecbm6040/model
->contains mDCSRN_WGAN.py which is the torch file containing the definition of the Generator and Discriminator neural networks.
+* run.py
+>contains the first implementation of similarity calculation.
 
-* ecbm6040/patching
->contains patchloader.py which takes full medical 3D images of dimensions 256x320x320 as input and cuts them into 4x5x5=100 patches of size 64x64x64.
+* save_to_db.py
+>contains the static table storage to PostgreSQL.
 
-*other folders*
-
-* csv
->contains the id list of the dataset. id_hcp.csv for the complete 1,113 dataset; id_hcp_test.csv for the small 130 dataset.
-
-* example_images
->contains all the example figures for illustration in jupyter notebooks and the intermediate results during training. Considering the space, we only uploaded some of them. All intermediate results during training will be actually stored in this folder.
-
-* loss_history
->contains the loss history through the formal training steps.
-
-* mnt
->a directory that you need to mount the original data folder in google storage to.
-
-* models
->contains the final models.
-
-*other files*
-
-* README.md
->the main introduction of our project.
-
-* kspace.m
->the example code for LR image generation implemented in Matlab.
-
-* requirements.txt
->the required environment for the experiment.
-
-### Examples
-
-![SR examples_images](./example_images/example.png)
 
 ### Prerequisites
 The coding is based on PyTorch 0.4.0 with CUDA 9.1 and CUDNN 7.5. The project is implemented originally on Google Cloud Platform (GCP).
