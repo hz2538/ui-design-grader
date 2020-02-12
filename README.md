@@ -89,32 +89,35 @@ The dataset is a large and publicly accessible APP design dataset called RICO (s
 >contains the steps of enviromental settings.
 
 * run.py
->contains the first implementation of similarity calculation.
+>contains the first implementation of similarity calculation based on SparkML.
 
 * save_to_db.py
 >contains the static table storage to PostgreSQL.
 
 
 ### Prerequisites
-The coding is based on PyTorch 0.4.0 with CUDA 9.1 and CUDNN 7.5. The project is implemented originally on Google Cloud Platform (GCP).
-Basically, you need these tools:
+There are separate computing units utilized to realize the current pipeline. To reproduce my environment, you will need:
+* 1 Spark Cluster (4 m5.large nodes) - backend
+* 1 Flask Cluster loaded with Tensorflow 2.0 (1~2 p2.xlarge nodes with 1 K80 GPU for each) - frontend
+* 1 PostgreSQL Node (1 t2.micro node) - database
 
-`pip install numpy matplotlib scipy nibabel pandas skimage`
+For the Spark Cluster, you are required to first install Pegasus. Please see the [installation tutorial](https://github.com/InsightDataScience/pegasus).
 
-See full details of the environment requirements in *requirements.txt*.
+[AWSCLI](https://aws.amazon.com/cli/?nc1=h_ls) is also needed to be installed and configured for the cluster. 
+
+Folder 'flask' and 'spark' were run in different envioronments. See full details of the environment requirements in *requirements.txt* inside 'flask' and 'spark' folders.
+
+
 
 ### How to run the code 
 
-* Make connection to the dataset.
->Multiple options to prepare the dataset:
-1. Use the example dataset we prepared. (It's already in folder *mnt*, but the small one that can only used for testing and cannot used for training.)
+* Make sure you have the spark cluster and the flask cluster ready. Clone this repo to both of them using `git clone https://github.com/hz2538/ui-design-grader.git`.
 
-2. Download from HCP dataset (The link above). But you need to downgrade the HR images by yourself. Here we provide an offline version MATLAB code for you (see kspace.m). Local storage is required. Online version is not provided in consideration of privacy. Then, arrange the data similarly in folder *mnt*.
+* For Spark environment, run install.sh to install miniconda and other necessary python packages.
 
-3. Request for full access to our Google Storage: gs://hz2538. After being accepted, use `gcsfuse --implicit-dirs "hz2538" mnt` to mount the disk to your GCP VM instance or local machine. For `gcsfuse`, see details on their website: https://github.com/GoogleCloudPlatform/gcsfuse. Please contact Huixiang Zhuang: hz2538@columbia.edu.
+* [PostgreSQL setup](https://blog.insightdatascience.com/simply-install-postgresql-58c1e4ebf252) on the t2.micro node.
 
-* Open *main.ipynb* and execute all cells.
-
+* 
 ### Acknowledgements
 
 We would present our sincere thanks to our research partners Jiayu Wang, Xiaomin He, Jieying Mai, who provide huge support on our project and have implemented Tensorflow version of this project (Their project link TO BE UPDATE).
