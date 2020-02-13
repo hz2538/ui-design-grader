@@ -10,7 +10,7 @@ The objective is to build a data-driven APP design recommendation platform (see 
 ### Dataset
 The dataset is a large and publicly accessible APP design dataset called RICO (site: http://interactionmining.org/rico). You can download full dataset from that website. The dataset contains several elements: 1. UI Screenshots and View Hierarchies; 2. UI Metadata; 3. UI Layout Vectors; 4. Interaction Traces; 5. Animations; 6. Play Store Metadata; 7. UI Screenshots and Hierarchies with Semantic Annotations. 
 
-(Note: currently, 1, 2, 6, 7 are used in AppDecoder v1.0. The rest would be used in future developments.)
+(**Note**: currently, 1, 2, 6, 7 are used in AppDecoder v1.0. The rest would be used in future developments.)
 
 ### Pipeline
 
@@ -105,7 +105,7 @@ For the Spark Cluster, you are required to first install Pegasus. Please see the
 
 [AWSCLI](https://aws.amazon.com/cli/?nc1=h_ls) is also needed to be installed and configured for the cluster. 
 
-Folder 'flask' and 'spark' were run in different envioronments. See full details of the environment requirements in *requirements.txt* inside 'flask' and 'spark' folders.
+**Note**: Folder 'flask' and 'spark' were run in different envioronments. See full details of the environment settings in *requirements.txt* inside 'flask' and 'spark' folders.
 
 
 
