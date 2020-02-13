@@ -5,6 +5,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 class Model(object):
+    '''
+    (Deprecated) The old version of similarity calculation. Will be removed in upcoming update.
+    '''
     def __init__(self, user_input, ui_targets):
         self.input = user_input
         self.targets = ui_targets

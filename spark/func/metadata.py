@@ -8,6 +8,9 @@ from .utils import Database
 import pickle
 
 class UITable(object):
+    '''
+    The class is based on UI DataFrame loaded from CSV file.
+    '''
     def __init__(self, path):
         self.path = path
         self.orig = None

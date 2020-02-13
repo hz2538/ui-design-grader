@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# save the static tables to Postgres database.
 from func.utils import *
 from func.metadata import AppTable, UITable
 from func.ui_semantic import SemTable

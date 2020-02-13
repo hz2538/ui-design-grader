@@ -27,7 +27,7 @@ class SemTable(object):
                         v_in.update({'componentLabel':v_child['componentLabel']})
                         elements.append(v_in)
     def getitem(self, file_path):
-        # read from json file, load as DataFrame
+        # read from json file, explode the nested hirearchy, and form as a DataFrame
         js_task = ReadJsonFile(file_path)
         uiid = file_path.split('/')[1].split('.')[0]
         js_df = js_task.load()

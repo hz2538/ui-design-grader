@@ -2,7 +2,6 @@ from . import spark
 from . import config
 
 class ReadCSVFile(object):
-
     def __init__(self,name):
         self.name = name
         bucket = config.get('AWS', 'bucket')
@@ -24,7 +23,6 @@ class ReadJsonFile(object):
         return js
 
 class Database(object):
-
     def __init__(self):
         self.username = config.get('PostgreSQL', 'username')
         self.password = config.get('PostgreSQL', 'password')

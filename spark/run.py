@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (Deprecated) The old version of similarity calculation. Will be removed in upcoming update.
 from func.utils import Database
 from func.model import Model
 from pyspark.sql.functions import column
