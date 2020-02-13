@@ -3,7 +3,7 @@ from . import connection
     
 class Validate(object):
     """
-    Validate the similarity results
+    Validate the similarity candidates. Find 4 most qualified similar candidates as results.
 
     """
 
@@ -19,12 +19,17 @@ class Validate(object):
     def __del__(self):
         """Deletion
 
-        Colse the cursor for database.
+        Close the cursor for database.
 
         """
         self._cursor.close()
 
     def fetch(self):
+        """Fetch results from database.
+
+        Fetch the validated results, and query corresponding app information for display. 
+
+        """
         table = []
         uiid_list = []
         sql = 'SELECT uiid FROM semantic WHERE (uiid in %(cands)s AND componentLabel in %(comp)s)'

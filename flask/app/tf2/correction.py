@@ -7,11 +7,21 @@ import pickle
 import sys
 
 def rgb2gray(rgb):
+    # rgb image to grayscale image
     r, g, b = rgb[:,:,0], rgb[:,:,1], rgb[:,:,2]
     gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
     return gray
 
-def generate(img_in, img_gen):
+def CVCorrection(img_in, img_gen):
+    '''
+    Computer vision correction of the generated result. It mainly deblurs the generated image by model, 
+    countours the bounding boxes of the generated parts, and judge the UI elements that generated. 
+    This is currently a brute-force, but neccessary step.
+    (Input) img_in: Tensor              the Tensor format of the input image.
+    (Input) img_gen: Tensor             the generated image by model.
+    (Output) img_generated: ndarray     the corrected generated image with rectangular bounding boxes on generated elements.
+    (Output) labels: list               Category of all the generated elements.
+    '''
     img_generated = img_in.numpy()
     this_path = os.path.dirname(os.path.abspath(__file__))
     file = open('{}/color_dict'.format(this_path), 'rb')

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+# Launch the server
 from app import app
 
 if __name__ == '__main__':

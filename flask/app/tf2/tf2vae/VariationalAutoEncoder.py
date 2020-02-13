@@ -117,6 +117,9 @@ def architecture(dims, n_z):
     return encoder, decoder
 
 def training():
+    """
+    Training the model. The training set image streaming is realized in this function by Tensorflow 2.0. The image data is processed and trained by batch.
+    """
     file = open('../localdata/train_list', 'rb')
     train_list = pickle.load(file)
     file.close()
@@ -204,6 +207,9 @@ def training():
         )
     
 def save_bottleneck(start_epoch):
+    """
+    Save the bottleneck (latent space) matrix of all the training set. The dimension should be (TRAIN_BUF, N_Z)
+    """
     file = open('../localdata/train_list', 'rb')
     train_list = pickle.load(file)
     file.close()
@@ -252,9 +258,10 @@ def save_bottleneck(start_epoch):
     np.save("ui_vectors.npy", ui_vectors)
     
 def preloading(pre_trained_weights, image):
-#     file = open('{}/app/tf2/test_list'.format(os.path.abspath(os.getcwd())), 'rb')
-#     test_list = pickle.load(file)
-#     file.close()
+    """
+    Preload the model. The image act as a placeholder here. Only when the model is built, the pre-trained parameters can be loaded in.
+    """
+
     BATCH_SIZE=64
     DIMS = (256,128,3)
     AUTOTUNE = tf.data.experimental.AUTOTUNE
@@ -275,6 +282,13 @@ def preloading(pre_trained_weights, image):
     return model
     
 def test(model, image):
+    """
+    Test phase of the model.
+    (Input) model: tf.keras.Model   the VAE model.
+    (Input) image: str              path to the test semantic annotation image.
+    (Output) image_prep: Tensor     the Tensor format of the input image.
+    (Output) z: Tensor              the bottleneck vector of the input image.
+    """
     # preprocess the image, the final format should be Tensor(256,128,3)
     image_prep = load_and_preprocess_image(image)
     img = tf.expand_dims(image_prep, 0)
@@ -288,10 +302,19 @@ def test(model, image):
     return image_prep, z
 
 def generated_encode(model, image):
+    """
+    Encode the generated image as a bottleneck vector.
+    (Input) model: tf.keras.Model   the VAE model.
+    (Input) image: ndarray          the numpy ndarray generated image after computer vision correction.
+    (Output) z: Tensor              the bottleneck vector of the generated image.
+    """
     img = tf.expand_dims(image, 0)
     q_z = model.encode(img)
     z = q_z.sample()
     return z
 
 def generate(model, z):
+    """
+    Decode the latent vector of the generated image.
+    """
     return model.decode(z)

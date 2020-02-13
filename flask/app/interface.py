@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from boto3 import client
 from . import app
 from .tf2.models import Model
-from .tf2.generate import generate 
+from .tf2.correction import CVCorrection
 from .query import Validate
 from . import aws_id, aws_key, aws_bucket
 
@@ -29,12 +29,15 @@ app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/uploads'
 
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
-patch_request_class(app)  # set maximum file size, default is 16MB
+patch_request_class(app)  
 
 model=None
 input_image = None
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    '''
+    This function mainly operates the user upload page.
+    '''
     global model
     global input_image
     # set session for image results
@@ -70,6 +73,9 @@ def index():
 
 @app.route('/results')
 def results():
+    '''
+    This function manages the result page. It contains model backend, query backend, and image downloading from S3.
+    '''
     global model
     global input_image
     img_recon = None
@@ -77,7 +83,7 @@ def results():
     if "file_urls" not in session or session['file_urls'] == []:
         return redirect(url_for('index'))
     img_in, img_gen= model.VAE(input_image)
-    img_recon, labels = generate(img_in, img_gen)
+    img_recon, labels = CVCorrection(img_in, img_gen)
     img = (img_recon * 255).astype('uint8')
     candidates = model.NN_similar(img_recon)
     # query
@@ -103,4 +109,4 @@ def results():
     # set the file_urls and remove the session variable
     file_urls = session['file_urls']
     
-    return render_template('results.html', file_urls=file_urls, result = result, img0 = imgs[0], img1= imgs[1], img2=imgs[2], img3=imgs[3],table=table)
+    return render_template('results.html', file_urls=file_urls, result = result, imgs= imgs, table=table)
