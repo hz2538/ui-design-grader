@@ -11,7 +11,7 @@ from . import app
 from .tf2.models import Model
 from .tf2.generate import generate 
 from .query import Validate
-from . import aws_id, aws_key
+from . import aws_id, aws_key, aws_bucket
 
 dropzone = Dropzone(app)
 
@@ -77,16 +77,16 @@ def results():
     if "file_urls" not in session or session['file_urls'] == []:
         return redirect(url_for('index'))
     img_in, img_gen= model.VAE(input_image)
-    img_recon = generate(img_in, img_gen)
+    img_recon, labels = generate(img_in, img_gen)
     img = (img_recon * 255).astype('uint8')
     candidates = model.NN_similar(img_recon)
     # query
-    validate = Validate(candidates[0:4])
+    validate = Validate(candidates, labels)
     table, uiid_list = validate.fetch()
     # download image from s3
     # create file-object in memory
     s3 = client('s3', aws_access_key_id = aws_id, aws_secret_access_key = aws_key)
-    Bucket="hxzhuang"
+    Bucket = aws_bucket
     imgs = []
     for i in range(len(uiid_list)):
         f_obj = io.BytesIO()
@@ -102,6 +102,5 @@ def results():
     result = base64.b64encode(file_object.getvalue()).decode()
     # set the file_urls and remove the session variable
     file_urls = session['file_urls']
-#     session.pop('file_urls', None)
     
     return render_template('results.html', file_urls=file_urls, result = result, img0 = imgs[0], img1= imgs[1], img2=imgs[2], img3=imgs[3],table=table)

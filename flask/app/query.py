@@ -6,13 +6,16 @@ class Validate(object):
     Validate the similarity results
 
     """
-    def __init__(self, candidates):
+
+    def __init__(self, candidates, labels):
         """Initialization
 
         """
         self._cursor = connection.cursor()
-        self.uiid_list = [c.split('.')[0] for c in candidates]
-        self.uiids = tuple(self.uiid_list)
+        self.uiid_cand_list = [c.split('.')[0] for c in candidates]
+        self.uiids = tuple(self.uiid_cand_list)
+        self.labels = tuple(labels)
+
     def __del__(self):
         """Deletion
 
@@ -20,19 +23,17 @@ class Validate(object):
 
         """
         self._cursor.close()
-        
-    def fetch(self):
-        """Fetch results 
-        Validate if the candidates contains the added elements.
 
-        """
+    def fetch(self):
         table = []
-        for i in range(len(self.uiid_list)):
-            sql = 'SELECT name, category, rating, dlnum FROM t1 WHERE (uiid = %(cands)s);'
-            self._cursor.execute(sql,{'cands':self.uiids[i]})
-            result=self._cursor.fetchall()
-            table.append(result[0])
-        uiid_list = self.uiid_list
+        uiid_list = []
+        sql = 'SELECT uiid FROM semantic WHERE (uiid in %(cands)s AND componentLabel in %(comp)s)'
+        self._cursor.execute(sql,{'cands':self.uiids, 'comp': self.labels})
+        id_match=self._cursor.fetchall()
+        sql = 'SELECT name, category, rating, dlnum, uiid FROM t1 WHERE (uiid in %(cands)s) ORDER BY rating DESC LIMIT 4;'
+        self._cursor.execute(sql,{'cands':tuple(id_match)})
+        table=self._cursor.fetchall()
+        uiid_list = [table[i][-1] for i in range(len(table))]
         return table, uiid_list
         
         

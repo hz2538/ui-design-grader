@@ -14,7 +14,7 @@ def rgb2gray(rgb):
 def generate(img_in, img_gen):
     img_generated = img_in.numpy()
     this_path = os.path.dirname(os.path.abspath(__file__))
-    file = open('{}/localdata/color_dict'.format(this_path), 'rb')
+    file = open('{}/color_dict'.format(this_path), 'rb')
     color_dict = pickle.load(file)
     file.close()
     image_gray = rgb2gray(img_in)
@@ -22,6 +22,7 @@ def generate(img_in, img_gen):
     recommends = []
     recommends_gray = []
     differences = []
+    labels = []
     for c in img_gen:    
         c_gray = rgb2gray(c)
         diff_gray = np.array(image_gray - c_gray)
@@ -59,6 +60,7 @@ def generate(img_in, img_gen):
                             final_color = color
                     img_add= cv2.rectangle(img_add,(x,y),(x+w,y+h),final_color,-1)
             img_generated = np.minimum(img_in, img_add)
-            return img_generated
+            labels.append(final_label)
+            return img_generated, labels
     except:
-        return img_generated
+        return img_generated, labels
