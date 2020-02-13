@@ -1,0 +1,3 @@
+You can just run the code as demo by flask. But my actual front-end pipeline is flask+Nginx+Gunicorn. 
+Please refer to the belowing links to install and configure them:
+https://medium.com/faun/deploy-flask-app-with-nginx-using-gunicorn-7fda4f50066a
