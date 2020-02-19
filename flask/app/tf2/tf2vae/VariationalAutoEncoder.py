@@ -53,8 +53,8 @@ class VAE(tf.keras.Model):
           )
         kl_div = ds.kl_divergence(q_z, p_z)
         latent_loss = tf.reduce_mean(tf.maximum(kl_div, 0))
-#         recon_loss = tf.reduce_mean(tf.reduce_sum(tf.math.square(x - x_recon), axis=0))
-        recon_loss = tf.reduce_mean(0.5 * tf.reduce_sum(tf.math.square(x - x_recon), axis=0)/ (2*tf.math.square(0.1)) + tf.math.log(0.1))
+        recon_loss = tf.reduce_mean(tf.reduce_sum(tf.math.square(x - x_recon), axis=0))
+        # recon_loss = tf.reduce_mean(0.5 * tf.reduce_sum(tf.math.square(x - x_recon), axis=0)/ (2*tf.math.square(0.1)) + tf.math.log(0.1))
         return recon_loss, latent_loss
 
     def compute_gradients(self, x):
