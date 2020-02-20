@@ -105,6 +105,8 @@ For the Spark Cluster, you are required to first install Pegasus. Please see the
 
 [AWSCLI](https://aws.amazon.com/cli/?nc1=h_ls) is also needed to be installed and configured for the cluster. 
 
+You need to prepare your App design screenshot, and the semantic annotation image as a pair of the input. For the current version, there is no interface for users to annotate. If you want to try the website, please download the `flask/testimage` folder for the demo images.
+
 **Note**: Folder 'flask' and 'spark' were run in different envioronments. See full details of the environment settings in *requirements.txt* inside 'flask' and 'spark' folders.
 
 
