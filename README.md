@@ -127,5 +127,3 @@ You need to prepare your App design screenshot, and the semantic annotation imag
     * Run `python wsgi.py` to launch the server.
     * Advanced: Flask + Nginx + Gunicorn is recommended for frontend deployment. See `documents/flask_advanced.txt` to build up this framework.
 
-### Acknowledgements
-
