@@ -63,7 +63,7 @@ gunicorn==20.0.4
 h5py==2.10.0
 hdijupyterutils==0.13.1
 heapdict==1.0.0
-horovod==0.18.2
+horovod==0.24.0
 html5lib==1.0.1
 idna==2.7
 imageio==2.3.0
